@@ -8,7 +8,7 @@ import { BASE_URL } from "utils/request";
 
 function Listing() {
 
-    const [pageNumer, setPageNumber] = useState(0);
+    const [pageNumber, setPageNumber] = useState(0);
 
     const [page, setPage] = useState<MoviePage>({
         content: [],
@@ -23,15 +23,16 @@ function Listing() {
     });
 
     useEffect(() => {
-        axios.get(`${BASE_URL}/movies?size12&page=${pageNumer}`).then(response => {
+        axios.get(`${BASE_URL}/movies?size=12&page=${pageNumber}`)
+        .then(response => {
             const data = response.data as MoviePage;
-            console.log(data);
+            
             setPage(data);
 
 
         });
 
-    }, [pageNumer]);
+    }, [pageNumber]);
 
     const handlePageChange =(newPagerNumber : number) =>{
         setPageNumber(newPagerNumber);
